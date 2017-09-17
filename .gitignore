@@ -1,0 +1,15 @@
+#folders
+build
+captures
+.externalNativeBuild
+.gradle
+.idea
+.DS_Store
+#compressed files
+*.iml
+*.apk
+*.aar
+*.zip
+#local files
+local.properties
+google-services.json
