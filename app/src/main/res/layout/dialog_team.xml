@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    android:padding="@dimen/step">
 
     <EditText
         android:id="@+id/edittext_team_name"
@@ -11,18 +12,23 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:inputType="textCapWords"
-        android:hint="@string/new_team_name"
-        android:paddingBottom="16dp"/>
+        android:hint="@string/new_team_name"/>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <Button
             android:id="@+id/button_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add"/>
-    </LinearLayout>
+            android:background="@android:color/transparent"
+            android:text="@android:string/ok"
+            android:textColor="@color/colorAccent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
 
 </LinearLayout>

@@ -1,0 +1,5 @@
+<resources>
+    <dimen name="step">16dp</dimen>
+    <dimen name="halfstep">8dp</dimen>
+    <dimen name="halfhalfstep">4dp</dimen>
+</resources>
