@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Plantio Caianinho Adm</string>
+
+    <string name="remove_data_message">Deseja remover %1$s do banco de dados?</string>
+    <string name="new_team_name">Nome da nova equipe</string>
+    <string name="required">Obrigatório</string>
+    <string name="add">Adicionar</string>
+
+    <string name="users">Usuários</string>
+    <string name="unauthorize_user_message">Deseja desautorizar %1$s?</string>
+    <string name="remove_user">Remover Usuário</string>
+    <string name="promote_to_coordinator">Promover a Coordenador</string>
+    <string name="promote_to_coordinator_message">Deseja promover %1$s a Coordenador?</string>
+    <string name="remove_coordinator">Remover da Coordenação</string>
+    <string name="remove_coordinator_message">Deseja remover %1$s da Coordenação?</string>
 </resources>
