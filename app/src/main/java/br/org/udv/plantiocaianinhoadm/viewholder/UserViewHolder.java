@@ -12,21 +12,21 @@ import br.org.udv.plantiocaianinhoadm.model.User;
 public class UserViewHolder extends RecyclerView.ViewHolder {
 
     public TextView userNameTextView;
+    public TextView userMacTextView;
     public ImageView authorizedImageView;
 
     public UserViewHolder(View itemView) {
         super(itemView);
         userNameTextView = (TextView) itemView.findViewById(R.id.textview_username);
+        userMacTextView = (TextView) itemView.findViewById(R.id.textview_usermac);
         authorizedImageView = (ImageView) itemView.findViewById(R.id.imageview_authorized);
     }
 
-    public void bindUser(User user) {
-        if (user.isAuthorized) {
+    public void bindUser(User user, String mac) {
+        if (user.isAuthorized)
             authorizedImageView.setImageResource(R.drawable.authorized);
-        }
-        else {
+        else
             authorizedImageView.setImageResource(R.drawable.unauthorized);
-        }
         if (user.isCoordinator) {
             userNameTextView.setText(user.name + " (Coord.)");
             userNameTextView.setTypeface(Typeface.DEFAULT_BOLD);
@@ -36,5 +36,6 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
             userNameTextView.setText(user.name);
             userNameTextView.setTypeface(Typeface.DEFAULT);
         }
+        userMacTextView.setText(mac);
     }
 }

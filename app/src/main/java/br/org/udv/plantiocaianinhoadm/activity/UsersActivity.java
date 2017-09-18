@@ -55,8 +55,7 @@ public class UsersActivity extends AppCompatActivity {
                 UserViewHolder.class, usersQuery) {
             @Override
             protected void populateViewHolder(UserViewHolder userViewHolder, final User user, int position) {
-                final DatabaseReference userRef = getRef(position);
-                final String userKey = userRef.getKey();
+                final String userKey = getRef(position).getKey();
                 userViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -140,7 +139,7 @@ public class UsersActivity extends AppCompatActivity {
                         return false;
                     }
                 });
-                userViewHolder.bindUser(user);
+                userViewHolder.bindUser(user, userKey);
             }
         };
         mRecycler.setAdapter(mAdapter);

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="step">16dp</dimen>
     <dimen name="halfstep">8dp</dimen>
