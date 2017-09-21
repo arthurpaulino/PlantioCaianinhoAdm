@@ -9,14 +9,14 @@ import br.org.udv.plantiocaianinhoadm.model.Team;
 
 public class TeamViewHolder extends RecyclerView.ViewHolder {
 
-    public TextView teamNameTextView;
+    public TextView txtName;
 
     public TeamViewHolder(View itemView) {
         super(itemView);
-        teamNameTextView = (TextView) itemView.findViewById(R.id.textview_teamname);
+        txtName = (TextView) itemView.findViewById(R.id.txt_name);
     }
 
     public void bindTeam(Team team) {
-        teamNameTextView.setText(team.name);
+        txtName.setText(team.name);
     }
 }

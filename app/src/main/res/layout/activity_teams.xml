@@ -2,14 +2,54 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="@dimen/step">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/txt_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:padding="@dimen/step"/>
+
+        <Button
+            android:id="@+id/btn_try_again"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:background="@color/colorPrimaryDark"
+            android:visibility="gone"
+            android:text="@string/try_again"
+            android:padding="@dimen/step"/>
+
+    </LinearLayout>
+
+    <Spinner
+        android:id="@+id/spn_region"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/step"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone">
+    </Spinner>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/teams_list"
+        android:id="@+id/teams_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/spn_region"
         android:clipToPadding="false"
-        android:scrollbars="vertical">
+        android:scrollbars="vertical"
+        android:visibility="gone">
     </android.support.v7.widget.RecyclerView>
 
     <android.support.design.widget.FloatingActionButton
@@ -20,6 +60,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:src="@drawable/star"
-        android:layout_margin="16dp"/>
+        android:layout_margin="16dp"
+        android:visibility="gone"/>
 
 </RelativeLayout>

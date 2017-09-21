@@ -2,7 +2,6 @@ package br.org.udv.plantiocaianinhoadm.activity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,35 +22,35 @@ public class UsersActivity extends AppCompatActivity {
 
     public static final String EXTRA_TEAM_NAME = "team_name";
 
-    private DatabaseReference mUsersDatabaseReference;
+    private DatabaseReference usersReference;
 
-    private FirebaseRecyclerAdapter<User, UserViewHolder> mAdapter;
-    private RecyclerView mRecycler;
-    private LinearLayoutManager mManager;
+    private FirebaseRecyclerAdapter<User, UserViewHolder> usersAdapter;
+    private RecyclerView usersRecycler;
+    private LinearLayoutManager usersLayoutManager;
 
     private String mTeamName;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users);
 
         mTeamName = getIntent().getStringExtra(EXTRA_TEAM_NAME);
 
-        mUsersDatabaseReference = FirebaseDatabase.getInstance().getReference(Defs.DB_USERS);
+        usersReference = FirebaseDatabase.getInstance().getReference(Defs.DB_USERS);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mRecycler = (RecyclerView) findViewById(R.id.users_list);
-        mRecycler.setHasFixedSize(true);
+        usersRecycler = (RecyclerView) findViewById(R.id.users_recycler);
+        usersRecycler.setHasFixedSize(true);
 
-        mManager = new LinearLayoutManager(UsersActivity.this);
-        mManager.setReverseLayout(true);
-        mManager.setStackFromEnd(true);
-        mRecycler.setLayoutManager(mManager);
+        usersLayoutManager = new LinearLayoutManager(UsersActivity.this);
+        usersLayoutManager.setReverseLayout(true);
+        usersLayoutManager.setStackFromEnd(true);
+        usersRecycler.setLayoutManager(usersLayoutManager);
 
-        Query usersQuery = getQuery(mUsersDatabaseReference);
-        mAdapter = new FirebaseRecyclerAdapter<User, UserViewHolder>(User.class, R.layout.item_user,
+        Query usersQuery = getQuery(usersReference);
+        usersAdapter = new FirebaseRecyclerAdapter<User, UserViewHolder>(User.class, R.layout.item_user,
                 UserViewHolder.class, usersQuery) {
             @Override
             protected void populateViewHolder(UserViewHolder userViewHolder, final User user, int position) {
@@ -66,13 +65,13 @@ public class UsersActivity extends AppCompatActivity {
                                         public void onClick(DialogInterface dialog, int whichButton) {
                                             user.isAuthorized = false;
                                             user.isCoordinator = false;
-                                            mUsersDatabaseReference.child(userKey).setValue(user);
+                                            usersReference.child(userKey).setValue(user);
                                         }})
                                     .setNegativeButton(android.R.string.no, null).show();
                         }
                         else {
                             user.isAuthorized = true;
-                            mUsersDatabaseReference.child(userKey).setValue(user);
+                            usersReference.child(userKey).setValue(user);
                         }
                     }
                 });
@@ -81,32 +80,15 @@ public class UsersActivity extends AppCompatActivity {
                     public boolean onLongClick(View view) {
                         if (!user.isCoordinator) {
                             new AlertDialog.Builder(UsersActivity.this)
-                                    .setPositiveButton(R.string.promote_to_coordinator, new DialogInterface.OnClickListener() {
+                                    .setMessage(getString(R.string.promote_to_coordinator_message, user.name))
+                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int whichButton) {
-                                            new AlertDialog.Builder(UsersActivity.this)
-                                                    .setMessage(getString(R.string.promote_to_coordinator_message, user.name))
-                                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                                        public void onClick(DialogInterface dialog, int whichButton) {
-                                                            user.isAuthorized = true;
-                                                            user.isCoordinator = true;
-                                                            mUsersDatabaseReference.child(userKey).setValue(user);
-                                                        }
-                                                    })
-                                                    .setNegativeButton(android.R.string.no, null).show();
+                                            user.isAuthorized = true;
+                                            user.isCoordinator = true;
+                                            usersReference.child(userKey).setValue(user);
                                         }
                                     })
-                                    .setNegativeButton(R.string.remove_user, new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            new AlertDialog.Builder(UsersActivity.this)
-                                                    .setMessage(getString(R.string.remove_data_message, user.name))
-                                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                                        public void onClick(DialogInterface dialog, int whichButton) {
-                                                            mUsersDatabaseReference.child(userKey).setValue(null);
-                                                        }
-                                                    })
-                                                    .setNegativeButton(android.R.string.no, null).show();
-                                        }
-                                    }).show();
+                                    .setNegativeButton(android.R.string.no, null).show();
                         }
                         else {
                             new AlertDialog.Builder(UsersActivity.this)
@@ -117,7 +99,7 @@ public class UsersActivity extends AppCompatActivity {
                                                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                                         public void onClick(DialogInterface dialog, int whichButton) {
                                                             user.isCoordinator = false;
-                                                            mUsersDatabaseReference.child(userKey).setValue(user);
+                                                            usersReference.child(userKey).setValue(user);
                                                         }
                                                     })
                                                     .setNegativeButton(android.R.string.no, null).show();
@@ -129,7 +111,7 @@ public class UsersActivity extends AppCompatActivity {
                                                     .setMessage(getString(R.string.remove_data_message, user.name))
                                                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                                         public void onClick(DialogInterface dialog, int whichButton) {
-                                                            mUsersDatabaseReference.child(userKey).setValue(null);
+                                                            usersReference.child(userKey).setValue(null);
                                                         }
                                                     })
                                                     .setNegativeButton(android.R.string.no, null).show();
@@ -139,10 +121,10 @@ public class UsersActivity extends AppCompatActivity {
                         return false;
                     }
                 });
-                userViewHolder.bindUser(user, userKey);
+                userViewHolder.bindUser(user);
             }
         };
-        mRecycler.setAdapter(mAdapter);
+        usersRecycler.setAdapter(usersAdapter);
     }
 
     private Query getQuery(DatabaseReference usersDatabaseReference) {
@@ -158,8 +140,8 @@ public class UsersActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mAdapter != null) {
-            mAdapter.cleanup();
+        if (usersAdapter != null) {
+            usersAdapter.cleanup();
         }
     }
 }

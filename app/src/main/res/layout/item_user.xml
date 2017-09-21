@@ -19,19 +19,19 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textview_username"
+                android:id="@+id/txt_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="name" />
             <TextView
-                android:id="@+id/textview_usermac"
+                android:id="@+id/txt_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="mac"/>
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/imageview_authorized"
+            android:id="@+id/img_authorization"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
