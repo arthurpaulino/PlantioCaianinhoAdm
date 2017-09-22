@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">PCAdm</string>
+    <string name="app_name">P. C. Admin</string>
 
     <string name="connecting">Conectando-se ao servidor…</string>
     <string name="authentication_failed">Falha ao autenticar-se</string>
     <string name="try_again">Tentar novamente</string>
 
+    <string name="teams">Equipes</string>
     <string-array name="array_regions">
         <item>Região</item>
         <item>Acre</item>
