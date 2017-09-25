@@ -184,10 +184,8 @@ public class TeamsActivity extends AppCompatActivity {
     }
 
     private void setSpinner() {
-        CustomSpinnerAdapter regionSpinnerAdapter = new CustomSpinnerAdapter(TeamsActivity.this,
-                android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.array_regions));
-        regionSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spnRegion.setAdapter(regionSpinnerAdapter);
+        spnRegion.setAdapter(new CustomSpinnerAdapter(TeamsActivity.this,
+                getResources().getStringArray(R.array.array_regions)));
         spnRegion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {

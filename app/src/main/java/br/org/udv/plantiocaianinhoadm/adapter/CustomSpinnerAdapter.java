@@ -11,8 +11,9 @@ import android.widget.TextView;
 
 public class CustomSpinnerAdapter extends ArrayAdapter<String> {
 
-    public CustomSpinnerAdapter(Context context, int textViewResourceId, String[] objects) {
-        super(context, textViewResourceId, objects);
+    public CustomSpinnerAdapter(Context context, String[] objects) {
+        super(context, android.R.layout.simple_spinner_item, objects);
+        setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     }
 
     @NonNull
